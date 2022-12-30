@@ -4,17 +4,17 @@
     <?php
         $GLOBALS['page_title'] = 'Doctor Dashboard';
         include('../includes/head.php');
-        require_once '../controller/Patient.controller.php';
+        require_once '../controller/Doctor.controller.php';
     ?>
 </head>
 <body>
     <?php
-        $GLOBALS['current_page'] = 'home';
-        include('../includes/paitent-sidebar.php');
+        $GLOBALS['current_page'] = 'dashboard';
+        include('../includes/doctor-sidebar.php');
     ?>
-    <main class="patient-home ml-64 p-6 flex flex-col gap-3">
+    <main class="doctor-dashboard ml-64 p-6 flex flex-col gap-3">
         <div class="header flex justify-between">
-            <h1 class="font-bold text-2xl">Home</h1>
+            <h1 class="font-bold text-2xl">Doctor Dashboard</h1>
             <div class="date flex gap-2">
                 <div class="font-bold">
                     <small class="block text-slate-500 text-right">Today's Date</small>
@@ -28,15 +28,11 @@
         <div class="banner relative w-full h-64 rounded-md overflow-hidden border mt-3 bg-cover">
             <div class="p-5">
                 <h2 class="font-semibold my-2">Welcome!</h2>
-                <span class="font-bold text-2xl">Patient</span>
-                <p class="my-4 text-sm">Haven't any idea about doctors ? no problem let's jump into <strong>"All Doctors"</strong> section or  <strong>"Sessions"</strong><br> Track your past and future appointments history.<br>Also find out the expected arrival time of your doctor or medical consultant </p>
-                <from class="search flex gap-2 items-center w-full lg:w-3/4">
-                    <div class="border-2 rounded flex items-center bg-white h-8 w-full lg:w-2/3">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#616161"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                        <input class="p-2 border-0 h-7 w-full focus:outline-0" type="text" placeholder="Search doctor name or email">
-                    </div>
-                    <button class="bg-sky-600 px-4 h-8 rounded text-white" >Search</button>
-                </from>
+                <span class="font-bold text-2xl">Test Doctor</span>
+                <p class="my-4 text-sm">Thanks for joinnig with us. We are always trying to get you a complete service <br>You can view your dailly schedule, Reach Patients Appointment at home!</p>
+                <a href="">
+                    <div class="w-72 py-1 text-white text-center text-sm bg-sky-600 rounded-md">View My Appointments</div>
+                </a>
             </div>
         </div>
         <div class="flex flex-col xl:flex-row gap-4">
@@ -82,40 +78,38 @@
                 </div>
             </div>
             <div class="upcoming-sessions block w-full xl:w-1/2">
-                <h2 class="font-bold text-xl my-4 ">Upcoming Bookings until Next Week</h2>
+                <h2 class="font-bold text-xl my-4 ">Upcoming Sessions until Next Week</h2>
                 <div class="w-full h-64 border-x border-t rounded-md overflow-y-scroll mt-3">
                     <table class="w-full relative">
                         <tr class="sticky top-0 bg-white">
-                            <th class="border-b-4 p-2 border-sky-400">Appoint. Number</th>
                             <th class="border-b-4 p-2 border-sky-400">Session Title</th>
-                            <th class="border-b-4 p-2 border-sky-400">Doctor</th>
-                            <th class="border-b-4 p-2 border-sky-400">Scheduled Date & Time</th>
+                            <th class="border-b-4 p-2 border-sky-400">Schduled Date</th>
+                            <th class="border-b-4 p-2 border-sky-400">Time</th>
                         </tr>
                         <?php 
-                            $myApp = myAppointments();
-                            foreach ($myApp as $row){
-                                $App_number = $row['Appointment Number'];
-                                $title = $row['Session Title'];
-                                $doctor = $row['Doctor'];
-                                $App_date = $row['Appointment Date'];
-                                $App_time = $row['Appointment Time'];
+                            $sessionPerWeek = sessionsPerWeek();
+                            foreach ($sessionPerWeek as $row) {
+                                $title = $row['title'];
+                                $date_start = $row['date_start'];
                                 echo "
                                     <tr class='border-2 border-sky-50'>
-                                        <td class='text-center py-2 font-bold'>$App_number</td>
                                         <td class='text-center py-2 '>$title</td>
-                                        <td class='text-center py-2 '>$doctor</td>
-                                        <td class='text-center py-2 '>$App_date / $App_time</td>
+                                        <td class='text-center py-2 '>$date_start</td>
+                                        <td class='text-center py-2 '>--:--</td>
                                     </tr>
                                 ";
                             }
+                            
                         ?>
                     </table>
                 </div>
-                <a href="patient-scheduled-sessions.php">
+                <a href="doctor-my-sessions.php">
                     <div class="w-full p-2 bg-sky-700 text-white text-center rounded-md" >Show all Sessions</div>
                 </a>
             </div>
         </div>
     </main>
+
+
 </body>
 </html>

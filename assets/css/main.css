@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+*{
+    font-family: 'Inter',sans-serif;
+}
+
+.sidebar .active{
+    color: #1d4ed8;
+    border-right-width: 4px;
+    border-right-color: #1d4ed8;
+}
+.sidebar .active > *{
+    fill: #1d4ed8;
+}
+
+.doctor-dashboard .banner{
+    background-image : url('/Gestion-RDB-Hopital/assets/img/b8.jpg');
+}
+
+.patient-home .banner{
+    background-image : url('/Gestion-RDB-Hopital/assets/img/b3.jpg');
+}
+#indexBody{
+    background-image: url("../img/bg01.jpg");
+    background-size: cover;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
